@@ -1,4 +1,5 @@
 import { Viajes } from "../models/Viaje.js"
+import { Testimonios } from "../models/Testimonios.js"
 
 const paginaInicio = (req,res) => {
     res.render("inicio",{
@@ -21,10 +22,17 @@ const paginaViajes = async (req,res) => {
     })
 }
 
-const paginaTestimonios = (req,res) => {
-    res.render("testimonios", {
-        pagina: "testimonios"
-    })
+const paginaTestimonios = async (req,res) => {
+    try{
+        const testimonios = await Testimonios.findAll()
+
+        res.render("testimonios", {
+            pagina: "testimonios",
+            testimonios
+        })
+    }catch(e){
+        console.log(e)
+    }
 }
 
 const paginaMostrarViaje = async (req,res) =>{

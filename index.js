@@ -15,7 +15,8 @@ app.use( (req, res, next) => {
     res.locals.actualYear = new Date().getFullYear()
     next()
 })
-
+//habilitar formulario
+app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use('/', router);
 app.use('/viajes', express.static('public'));
