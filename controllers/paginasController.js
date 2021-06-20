@@ -27,14 +27,21 @@ const paginaTestimonios = (req,res) => {
     })
 }
 
-const paginaMostrarViaje = (req,res) =>{
-    const slug = req.params.viaje
-    console.log(slug)
+const paginaMostrarViaje = async (req,res) =>{
+    const {viaje} = req.params
+
+    
 
     try{
+        const viajeMostrar = await Viajes.findOne({
+            where: {
+                slug: viaje
+            }
+        })
+
         res.render("mostrarViaje",{
             pagina: "Información del viaje",
-            slug
+            viajeMostrar
         })
     }catch(e){
         console.log(e)
