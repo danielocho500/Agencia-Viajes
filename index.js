@@ -1,6 +1,12 @@
 import express from 'express';
 import router from  './routes/index.js'
 import db from './config/db.js'
+import dotenv from 'dotenv';
+
+dotenv.config({path:"variables.env"});
+
+const { HOST,
+        PORT} = process.env
 
 const app = express();
 
@@ -20,8 +26,12 @@ app.use(express.urlencoded({extended: true}))
 app.use(express.static('public'))
 app.use('/', router);
 app.use('/viajes', express.static('public'));
-const port = process.env.PORT || 3000
 
-app.listen(port, ()=>{
-    console.log(`puerto ${port}`)
+const host = HOST || '0.0.0.0'
+const port = PORT || 3000
+
+
+
+app.listen(port,host, ()=>{
+    console.log(`puerto ${port} host ${host} `)
 })
